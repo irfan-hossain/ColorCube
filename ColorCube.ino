@@ -46,7 +46,7 @@ void loop()
   Serial.print("\t");
   Serial.println(neo_blue);
 
-  
+
   // Update NeoPixels with senesor value.
   //pixels.clear();
   for(int i=0;i<NUMPIXELS;i++)
