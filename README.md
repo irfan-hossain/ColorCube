@@ -6,3 +6,5 @@ A fun project that uses an Adafruit TCS34725 RGB color sensor and NeoPixel ring 
 * Adafruit TCS34725 color sesnor.
 * NeoPixel 16 Pixel LED Ring.
 * ~~LiPo Battery~~
+
+![](Schematic.PNG)

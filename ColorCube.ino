@@ -36,12 +36,19 @@ void loop()
   delay(60); // Takes 50ms to read data.
 
   // Convert 16-bit output to 8-bits.
-  neo_red = (red >> 8)*50;
-  neo_green = (green >> 8)*50;
-  neo_blue = (blue >> 8)*50;
+  neo_red = (red >> 8) * 5;
+  neo_green = (green >> 8) * 5;
+  neo_blue = (blue >> 8) * 5;
 
+  Serial.print(neo_red);
+  Serial.print("\t");
+  Serial.print(neo_green);
+  Serial.print("\t");
+  Serial.println(neo_blue);
+
+  
   // Update NeoPixels with senesor value.
-  pixels.clear();
+  //pixels.clear();
   for(int i=0;i<NUMPIXELS;i++)
   {
     pixels.setPixelColor(i, pixels.Color(neo_red,neo_green,neo_blue));
