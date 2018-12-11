@@ -8,4 +8,4 @@ A fun project that uses an Adafruit TCS34725 RGB color sensor and NeoPixel ring 
 * ~~LiPo Battery~~
 
 
-  ![Schematic](Schematic.PNG)
+  ![Schematic](Schematic.png)
