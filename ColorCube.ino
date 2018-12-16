@@ -34,6 +34,10 @@ void setup()
   //
   pinMode(TCS_LED_PIN, OUTPUT);
   pinMode(PHOTO_R_PIN, INPUT);
+
+  /////////////////////////////////////////
+  //
+  updateAllPixels(NEOPIXEL_WHITE, NEOPIXEL_WHITE, NEOPIXEL_WHITE, NUMPIXELS);
 }
 
 void loop()
@@ -43,7 +47,8 @@ void loop()
 
   // Get data and update if there's a shadow.
   int photoRValue = analogRead(PHOTO_R_PIN);
-  if (photoRValue < 500)
+  //Serial.println(photoRValue);
+  if (photoRValue < SHADOW_THRESHOLD)
   {
     // Get data from sensor.
     getData(&red, &green, &blue, &clr);

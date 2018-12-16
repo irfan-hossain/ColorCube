@@ -14,7 +14,9 @@
 
 #define NUMPIXELS 16
 #define BAUD_RATE 9600
-#define TCS_DELAY 60
+#define TCS_DELAY 500
+#define NEOPIXEL_WHITE 100
+#define SHADOW_THRESHOLD 700
 
 /////////////////////////////////////////
 //
@@ -32,3 +34,7 @@ void getData(uint16_t *red, uint16_t *blue, uint16_t *green, uint16_t *clear);
 //
 void updateAllPixels(uint8_t red, uint8_t blue, uint8_t green, int num);
 #endif UTILS_H
+
+/////////////////////////////////////////
+//
+void printValues(uint8_t red, uint8_t green, uint8_t blue);

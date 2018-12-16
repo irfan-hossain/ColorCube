@@ -55,18 +55,30 @@ uint8_t convertToGamma(uint16_t clr, uint16_t rawData)
 void getData(uint16_t *red, uint16_t *blue, uint16_t *green, uint16_t *clr)
 {
   digitalWrite(TCS_LED_PIN, HIGH);
+  delay(TCS_DELAY);
   tcs.getRawData(red, blue, green, clr);
-  delay(1000);
+  delay(TCS_DELAY);
   digitalWrite(TCS_LED_PIN, LOW);
+  delay(TCS_DELAY);
 }
 
 /////////////////////////////////////////
 // Update all the neopixels.
 void updateAllPixels(uint8_t red, uint8_t blue, uint8_t green, int num)
 {
-  for(int i=0;i<NUMPIXELS;i++)
+  for(int i=0;i<num;i++)
   {
     pixels.setPixelColor(i, red, green, blue);
     pixels.show();
   }
+}
+
+/////////////////////////////////////////
+//
+void printValues(uint8_t red, uint8_t green, uint8_t blue)
+{
+  Serial.print("RED: "); Serial.print("\t"); Serial.println(red);
+  Serial.print("GRN: "); Serial.print("\t"); Serial.println(green);
+  Serial.print("BLU: "); Serial.print("\t"); Serial.println(blue);
+  Serial.println(" ");
 }
