@@ -17,6 +17,8 @@ Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, NEOPIXEL_PIN
                                           ,NEO_GRB + NEO_KHZ800);
 
+static uint16_t redMax, greenMax, blueMax, clrMax;
+
 void setup()
 {
 
@@ -28,16 +30,15 @@ void setup()
 
   /////////////////////////////////////////
   //
-  initGammaTable();
-
-  /////////////////////////////////////////
-  //
   pinMode(TCS_LED_PIN, OUTPUT);
   pinMode(PHOTO_R_PIN, INPUT);
 
   /////////////////////////////////////////
   //
-  updateAllPixels(NEOPIXEL_WHITE, NEOPIXEL_WHITE, NEOPIXEL_WHITE, NUMPIXELS);
+  calibrate(&redMax, &blueMax, &greenMax, &clrMax);
+  /////////////////////////////////////////
+  //
+  updateAllPixels(NEOPIXEL_ON, NEOPIXEL_ON, NEOPIXEL_ON, NUMPIXELS, 0);
 }
 
 void loop()
@@ -55,11 +56,11 @@ void loop()
 
     // Convert raw data to gamma`values.
     uint8_t r, g, b;
-    r = convertToGamma(clr, red);
-    g = convertToGamma(clr, green);
-    b = convertToGamma(clr, blue);
+    r = mapColors256(red, redMax);
+    g = mapColors256(green, greenMax);
+    b = mapColors256(blue, blueMax);
 
     // Update neopixel color.
-    updateAllPixels(r, g, b, NUMPIXELS);
+    updateAllPixels(r, g, b, NUMPIXELS, 0);
   }
 }
