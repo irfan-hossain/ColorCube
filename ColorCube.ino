@@ -10,8 +10,6 @@
 #include <Adafruit_TCS34725.h>
 #include "utils.h"
 
-uint8_t gammatable[256];
-
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS
                                           ,TCS34725_GAIN_4X);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, NEOPIXEL_PIN
@@ -36,6 +34,7 @@ void setup()
   /////////////////////////////////////////
   //
   calibrate(&redMax, &blueMax, &greenMax, &clrMax);
+
   /////////////////////////////////////////
   //
   updateAllPixels(NEOPIXEL_ON, NEOPIXEL_ON, NEOPIXEL_ON, NUMPIXELS, 0);
@@ -43,15 +42,12 @@ void setup()
 
 void loop()
 {
-  // TCS outputs sensor values as uint16_t
-  uint16_t red, green, blue, clr;
-
   // Get data and update if there's a shadow.
   int photoRValue = analogRead(PHOTO_R_PIN);
-  //Serial.println(photoRValue);
   if (photoRValue < SHADOW_THRESHOLD)
   {
     // Get data from sensor.
+    uint16_t red, green, blue, clr;
     getData(&red, &green, &blue, &clr);
 
     // Convert raw data to gamma`values.
