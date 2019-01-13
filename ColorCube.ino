@@ -16,6 +16,7 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, NEOPIXEL_PIN
                                           ,NEO_GRB + NEO_KHZ800);
 
 static uint16_t redMax, greenMax, blueMax, clrMax;
+static uint16_t ambientLight;
 
 void setup()
 {
@@ -33,7 +34,7 @@ void setup()
 
   /////////////////////////////////////////
   //
-  calibrate(&redMax, &blueMax, &greenMax, &clrMax);
+  calibrate(&redMax, &greenMax, &blueMax, &clrMax, &ambientLight);
 
   /////////////////////////////////////////
   //
@@ -43,8 +44,8 @@ void setup()
 void loop()
 {
   // Get data and update if there's a shadow.
-  int photoRValue = analogRead(PHOTO_R_PIN);
-  if (photoRValue < SHADOW_THRESHOLD)
+  int currLight= analogRead(PHOTO_R_PIN);
+  if ((ambientLight - currLight) > SHADOW_DIFF_THRESHOLD)
   {
     // Get data from sensor.
     uint16_t red, green, blue, clr;
@@ -56,6 +57,7 @@ void loop()
     g = mapColors256(green, greenMax);
     b = mapColors256(blue, blueMax);
 
+    printValues(r,g,b);
     // Update neopixel color.
     updateAllPixels(r, g, b, NUMPIXELS, 0);
   }

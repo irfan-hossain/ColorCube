@@ -26,7 +26,8 @@ uint8_t mapColors256(uint16_t rawData, uint16_t max)
 
 /////////////////////////////////////////
 //
-void calibrate(uint16_t *red, uint16_t *blue, uint16_t *green, uint16_t *clr)
+void calibrate(uint16_t *red, uint16_t *green, uint16_t *blue,
+                             uint16_t *clr, uint16_t *ambient)
 {
   // These variable are used to only get one color value, since
   // for each channel we want just that channels color value.
@@ -46,18 +47,21 @@ void calibrate(uint16_t *red, uint16_t *blue, uint16_t *green, uint16_t *clr)
   updateAllPixels(0, 0, NEOPIXEL_ON, NUMPIXELS, CALIBRATE_DELAY);
   getData(&dummy1, &dummy2, blue, clr);
   updateAllPixels(0, 0, 0, NUMPIXELS, 0);
+
+  // Get ambient light reading.
+  *ambient = analogRead(PHOTO_R_PIN);
 }
 
 /////////////////////////////////////////
 //
-void getData(uint16_t *red, uint16_t *blue, uint16_t *green, uint16_t *clr)
+void getData(uint16_t *red, uint16_t *green, uint16_t *blue, uint16_t *clr)
 {
   // Turn TCS LED on.
   digitalWrite(TCS_LED_PIN, HIGH);
   delay(TCS_DELAY);
 
   // Get data.
-  tcs.getRawData(red, blue, green, clr);
+  tcs.getRawData(red, green, blue, clr);
   delay(TCS_DELAY);
 
   // Turn TCS LED off.
@@ -67,7 +71,7 @@ void getData(uint16_t *red, uint16_t *blue, uint16_t *green, uint16_t *clr)
 
 /////////////////////////////////////////
 //
-void updateAllPixels(uint8_t red, uint8_t blue, uint8_t green, int num, int delayTime)
+void updateAllPixels(uint8_t red, uint8_t green, uint8_t blue, int num, int delayTime)
 {
   for(int i=0;i<num;i++)
   {
