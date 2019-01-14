@@ -17,7 +17,7 @@
 #define TCS_DELAY 500 // Delay for how long TCS led should be on.
 #define CALIBRATE_DELAY 300 // Delay between each led turning on during calib.
 #define NEOPIXEL_ON 100 // Value to turn neopixel on for each color channe.l
-#define SHADOW_DIFF_THRESHOLD 250 // Threshold for photoresistor sensor value.
+#define SHADOW_DIFF_THRESHOLD 300 // Threshold for photoresistor sensor value.
 
 /////////////////////////////////////////
 // module: mapColors256
