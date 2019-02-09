@@ -44,7 +44,7 @@ void setup()
 void loop()
 {
   // Get data and update if there's a shadow.
-  int currLight= analogRead(PHOTO_R_PIN);
+  int currLight = analogRead(PHOTO_R_PIN);
   if ((ambientLight - currLight) > SHADOW_DIFF_THRESHOLD)
   {
     // Get data from sensor.

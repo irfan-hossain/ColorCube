@@ -13,7 +13,6 @@
 
 extern Adafruit_TCS34725 tcs;
 extern Adafruit_NeoPixel pixels;
-extern uint8_t gammatable[256];
 
 /////////////////////////////////////////
 //
