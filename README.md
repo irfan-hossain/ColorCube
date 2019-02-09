@@ -6,7 +6,8 @@ A fun project that uses an Adafruit TCS34725 RGB color sensor and NeoPixel ring 
 * Adafruit TCS34725 color sesnor
 * NeoPixel 16 Pixel LED Ring
 * 220 Ohm Resistor
-  ![Schematic](images/Schematic.png)
+
+  <img src="images/Schematic.png" width="500">
 
 # Overview
 The TCS module returns 16-bit values for each color channel (red, green, blue, and clear). The firmware converts these values into 8-bit values for the NeoPixel ring to utilize. The conversion is based on a calibration step that occurs when the device is first powered up in an attempt to read colors with increased accurately. A photo-resistor is used to detect a shadow over the sensor so the device will know when to take a sample and change color.
